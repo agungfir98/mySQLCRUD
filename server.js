@@ -6,6 +6,7 @@ const cors = require("cors");
 const mysql = require("mysql2");
 
 const routeHandler = require("./route/route");
+
 const PORT = process.env.PORT;
 const password = process.env.DBPASSWORD;
 
@@ -23,8 +24,12 @@ connection.connect((err) => {
   console.log("database terhubung");
 });
 
+app.use(express.static(__dirname + "/public"));
+app.set("view engine", "ejs");
+
 app.use(cors());
-app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+// app.use(bodyparser.json());
 
 app.use("/", routeHandler);
 

@@ -1,11 +1,13 @@
 const router = require("express").Router();
+const {
+  getMenus,
+  addMenu,
+  delMenu,
+  updateMenu,
+} = require("../controller/controller.js");
+// const ini = require("../controller/controller");
+// console.log(ini);
 
-router.route("/").get((req, res) => {
-  let sql = "SELECT * FROM menus";
-  connection.query(sql, (err, results) => {
-    if (err) throw err;
-    res.send(results);
-  });
-});
+router.route("/").get(getMenus).post(addMenu).delete(delMenu).put(updateMenu);
 
 module.exports = router;
